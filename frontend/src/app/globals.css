@@ -24,10 +24,10 @@ body {
   display: inline-block; /* Ensures the box sizes to its content */
   padding: 0.5rem 1rem; /* Adds spacing around the text */
   border: 2px solid rgba(59, 130, 246, 1); /* Solid blue border */
-  background: rgba(59, 130, 246, 0.1); /* Transparent blue background */
+  background: rgba(20, 104, 239, 0.1); /* Transparent blue background */
   border-radius: 0.375rem; /* Rounded corners (equivalent to Tailwind's rounded-md) */
   font-weight: bold; /* Makes the text bold */
-  color: rgba(59, 130, 246, 1); /* Sets the text color to blue */
+  color: rgb(255, 255, 255); /* Sets the text color to blue */
   text-align: center; /* Ensures the text is centered */
   transition: color 0.3s ease, background 0.3s ease; /* Smooth hover effects */
 }

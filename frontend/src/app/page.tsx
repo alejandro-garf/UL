@@ -30,8 +30,8 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8">
             <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
             <Link href="/dashboard" className="hover:text-blue-400 transition-colors">Dashboard</Link>
-            <Link href="/jobs" className="hover:text-blue-400 transition-colors">Jobs</Link>
-            <Link href="/internships" className="hover:text-blue-400 transition-colors">Internships</Link>
+            <Link href="/jobs" className="hover:text-blue-400 transition-colors">Job Opportunities</Link>
+            <Link href="/internships" className="hover:text-blue-400 transition-colors">Legal Help</Link>
             <Link href="/scholarships" className="hover:text-blue-400 transition-colors">Scholarships</Link>
             <Link href="/networking" className="hover:text-blue-400 transition-colors">Networking</Link>
           </div>

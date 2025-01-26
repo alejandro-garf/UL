@@ -21,17 +21,17 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/50 backdrop-blur-lg' : ''}`}>
         <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Logo" width={32} height={32} className="rounded-full" />
             <span className="text-xl font-medium">UndocuLink</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
             <Link href="/dashboard" className="hover:text-blue-400 transition-colors">Dashboard</Link>
-            <Link href="/jobs" className="hover:text-blue-400 transition-colors">Job Opportunities</Link>
-            <Link href="/internships" className="hover:text-blue-400 transition-colors">Legal Help</Link>
+            <Link href="/jobs" className="hover:text-blue-400 transition-colors">Jobs</Link>
+            <Link href="/internships" className="hover:text-blue-400 transition-colors">Internships</Link>
             <Link href="/scholarships" className="hover:text-blue-400 transition-colors">Scholarships</Link>
             <Link href="/networking" className="hover:text-blue-400 transition-colors">Networking</Link>
           </div>
@@ -79,7 +79,9 @@ export default function Home() {
             <Link href="/scholarships" className="block hover:text-blue-400">Scholarships</Link>
             <Link href="/networking" className="block hover:text-blue-400">Networking</Link>
             <div className="pt-4 border-t border-gray-800">
-              <Link href="/login" className="block text-blue-400 hover:text-blue-300 mb-4">Login</Link>
+              <Link href="/login" className="transparent-box">
+              Login
+              </Link>
               <Link href="/signup" className="block px-4 py-2 bg-blue-500 text-center rounded-md hover:bg-blue-600">
                 Sign Up
               </Link>

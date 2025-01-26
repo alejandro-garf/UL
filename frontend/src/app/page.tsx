@@ -73,9 +73,9 @@ export default function Home() {
         >
           <div className="px-6 py-4 bg-gray-900/90 backdrop-blur-lg space-y-4">
             <Link href="/" className="block hover:text-blue-400">Home</Link>
-            <Link href="/dashboard" className="block hover:text-blue-400">Dashbioard</Link>
-            <Link href="/jobs" className="block hover:text-blue-400">Work Opportunities</Link>
-            <Link href="/internships" className="block hover:text-blue-400">Legal Help</Link>
+            <Link href="/dashboard" className="block hover:text-blue-400">Dashboard</Link>
+            <Link href="/jobs" className="block hover:text-blue-400">Jobs</Link>
+            <Link href="/internships" className="block hover:text-blue-400">Internships</Link>
             <Link href="/scholarships" className="block hover:text-blue-400">Scholarships</Link>
             <Link href="/networking" className="block hover:text-blue-400">Networking</Link>
             <div className="pt-4 border-t border-gray-800">

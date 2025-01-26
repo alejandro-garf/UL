@@ -20,23 +20,24 @@ export default function Home() {
  return (
    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/50 backdrop-blur-lg' : ''}`}>
-       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-         <Link href="/" className="flex items-center gap-2">
-           <Image src="/logo.png" alt="Logo" width={75} height={75} className="rounded-full" />
-           <span className="text-xl font-bold">UndocuLink</span>
+     {/*logo left*/}
+       <nav className="w-full mx-auto px-10 h-22 flex items-center justify-between">
+         <Link href="/" className="ml-0">
+           <Image src="/logo.png" alt="Logo" width={100} height={100} className="rounded-full" />
          </Link>
 
          {/* Desktop Navigation */}
          <div className="hidden md:flex items-center gap-8">
-           <Link href="/dashboard" className="hover:text-blue-400 transition-colors">Dashboard</Link>
-           <Link href="/jobs" className="hover:text-blue-400 transition-colors">Job Opportunities</Link>
-           <Link href="/internships" className="hover:text-blue-400 transition-colors">Legal Help</Link>
-           <Link href="/scholarships" className="hover:text-blue-400 transition-colors">Scholarships</Link>
-           <Link href="/networking" className="hover:text-blue-400 transition-colors">Networking</Link>
-           <Link href="/networking" className="hover:text-blue-400 transition-colors">Social Media</Link>
+           <Link href="/dashboard" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Dashboard</Link>
+           <Link href="/jobs" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Job Opportunities</Link>
+           <Link href="/legal" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Legal Help</Link>
+           <Link href="/scholarships" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Scholarships</Link>
+           <Link href="/networking" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Networking</Link>
+           <Link href="/socialmedia" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Social Media</Link>
          </div>
-
-         <div className="hidden md:flex items-center gap-4">
+        
+        {/*sign in and sign out*/}
+         <div className="hidden md:flex items-center gap-4 mr-0">
            <Link href="/login" className="px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors">
              Login
            </Link>
@@ -74,10 +75,10 @@ export default function Home() {
          <div className="px-6 py-4 bg-gray-900/90 backdrop-blur-lg space-y-4">
            <Link href="/dashboard" className="block hover:text-blue-400 transition-colors">Dashboard</Link>
            <Link href="/jobs" className="block hover:text-blue-400 transition-colors">Job Opportunities</Link>
-           <Link href="/internships" className="block hover:text-blue-400 transition-colors">Legal Help</Link>
+           <Link href="/legal" className="block hover:text-blue-400 transition-colors">Legal Help</Link>
            <Link href="/scholarships" className="block hover:text-blue-400 transition-colors">Scholarships</Link>
            <Link href="/networking" className="block hover:text-blue-400 transition-colors">Networking</Link>
-           <Link href="/networking" className="block hover:text-blue-400 transition-colors">Social Media</Link>
+           <Link href="/socialmedia" className="block hover:text-blue-400 transition-colors">Social Media</Link>
            <div className="pt-4 border-t border-gray-800">
              <Link href="/login" className="px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors">
                Login
@@ -90,7 +91,7 @@ export default function Home() {
        </motion.div>
      </header>
 
-     <main className="pt-32 md:pt-40">
+     <main className="pt-32 md:pt-56">
        {/* Hero Section */}
        <div className="max-w-7xl mx-auto px-6">
          <motion.div
@@ -99,12 +100,12 @@ export default function Home() {
            transition={{ duration: 0.5 }}
            className="text-center"
          >
-           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8">
+           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 text-shadow">
              <motion.span
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.2 }}
-               className="text-blue-400 block"
+               className="text-blue-400 block text-shadow"
              >
                Empowering Students
              </motion.span>
@@ -121,7 +122,7 @@ export default function Home() {
              initial={{ opacity: 0 }}
              animate={{ opacity: 1 }}
              transition={{ delay: 0.6 }}
-             className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12"
+             className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 text-shadow"
            >
              A centralized platform connecting undocumented and immigrant students with career resources
            </motion.p>
@@ -133,14 +134,8 @@ export default function Home() {
              className="flex flex-col sm:flex-row justify-center gap-4"
            >
              <Link 
-               href="/resources" 
-               className="px-6 py-3 bg-blue-500 rounded-md hover:bg-blue-600 transition-colors"
-             >
-               Explore Resources
-             </Link>
-             <Link 
                href="/get-started"
-               className="px-6 py-3 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors"
+               className="px-6 py-3 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors text-shadow"
              >
                Get Started
              </Link>

@@ -268,6 +268,72 @@ export default function Home() {
    </motion.div>
  </motion.div>
 </div>
+{/* Features Offered Section */}
+<div className="max-w-7xl mx-auto px-6 mt-32">
+  <motion.h2
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+    className="text-3xl font-bold text-blue-400 text-center mb-12"
+  >
+    Features Offered
+  </motion.h2>
+
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    viewport={{ once: true }}
+    className="grid grid-cols-1 md:grid-cols-3 gap-8"
+  >
+    {[
+      {
+        title: "Professional Development",
+        description: "Access to job boards, internships, and career guidance specifically tailored for undocumented students.",
+        icon: "🎯"
+      },
+      {
+        title: "Legal Resources",
+        description: "Connect with immigration lawyers and stay updated with the latest DACA information and requirements.",
+        icon: "⚖️"
+      },
+      {
+        title: "Financial Aid",
+        description: "Discover scholarships, grants, and financial assistance programs open to undocumented students.",
+        icon: "🎓"
+      },
+      {
+        title: "Community Support",
+        description: "Join a network of students, professionals, and allies who understand and support your journey.",
+        icon: "🤝"
+      },
+      {
+        title: "Resource Library",
+        description: "Access guides, templates, and educational materials to help you navigate your academic journey.",
+        icon: "📚"
+      },
+      {
+        title: "Secure Platform",
+        description: "Your privacy and security are our top priority. No personal data collection or paywalls.",
+        icon: "🔒"
+      }
+    ].map((feature, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.1 }}
+        viewport={{ once: true }}
+        className="p-8 bg-gray-800/50 rounded-xl hover:bg-gray-800/70 transition-all hover:-translate-y-1"
+      >
+        <div className="text-4xl mb-4">{feature.icon}</div>
+        <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
+        <p className="text-gray-400">{feature.description}</p>
+      </motion.div>
+    ))}
+  </motion.div>
+</div>
 </main>
 
 

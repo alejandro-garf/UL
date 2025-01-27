@@ -1,3 +1,14 @@
+package com.undoculink.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -10,7 +21,12 @@ public class User {
     private String publicKey;
     private String hashedPin;
     private String seedPhraseHash;
+    
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    // Getters, setters, constructors
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }

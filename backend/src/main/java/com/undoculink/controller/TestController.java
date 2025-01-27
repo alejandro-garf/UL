@@ -1,6 +1,6 @@
 // Creates an API endpoint at http://localhost:8080/api/message
 
-package com.undoculink;
+package com.undoculink.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

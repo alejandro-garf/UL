@@ -1,4 +1,4 @@
-package com.undoculink;
+package com.undoculink.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

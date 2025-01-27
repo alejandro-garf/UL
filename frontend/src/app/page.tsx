@@ -289,13 +289,13 @@ export default function Home() {
   >
     {[
       {
-        title: "Professional Development",
-        description: "Access to job boards, internships, and career guidance specifically tailored for undocumented students.",
-        icon: "🎯"
+        title: "Our Job Opportunities Hub",
+        description: "Access to independent contracting job listings, stipend internship, fellowships and reseaerch opportunities. As well as entreneprenuership resources for undocu business owners.",
+        icon: "💼"
       },
       {
         title: "Legal Resources",
-        description: "Connect with immigration lawyers and stay updated with the latest DACA information and requirements.",
+        description: "Stay on top of the latest news, your rights, and find free legal services near you.",
         icon: "⚖️"
       },
       {
@@ -309,13 +309,13 @@ export default function Home() {
         icon: "🤝"
       },
       {
-        title: "Resource Library",
-        description: "Access guides, templates, and educational materials to help you navigate your academic journey.",
-        icon: "📚"
+        title: "Social Media",
+        description: "Find Undocu-friendly creators or connect with businesses and other resources through social media",
+        icon: "📱"
       },
       {
         title: "Secure Platform",
-        description: "Your privacy and security are our top priority. No personal data collection or paywalls.",
+        description: "Your privacy is our priority. We use Signal's industry-leading encryption standards and collect minimal information if you decide to use our networking features, ensuring your data stays secure and private. ",
         icon: "🔒"
       }
     ].map((feature, index) => (

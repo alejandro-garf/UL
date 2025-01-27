@@ -190,85 +190,85 @@ export default function Home() {
            ))}
          </motion.div>
        </div>
-
        {/* About Us Section */}
-       <div id="about" className="max-w-7xl mx-auto px-6 mt-32">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-3xl font-bold text-blue-400 text-center mb-12"
-          >
-            About Us
-          </motion.h2>
+<div id="about" className="max-w-7xl mx-auto px-6 mt-32">
+ <motion.h2
+   initial={{ opacity: 0, y: 20 }}
+   whileInView={{ opacity: 1, y: 0 }}
+   transition={{ duration: 0.5 }}
+   viewport={{ once: true }}
+   className="text-3xl font-bold text-blue-400 text-center mb-12"
+ >
+   About Us
+ </motion.h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
-          >
-            <div className="space-y-6">
-              <motion.h3 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                viewport={{ once: true }}
-                className="text-2xl font-semibold mb-4"
-              >
-                Our Mission
-              </motion.h3>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                viewport={{ once: true }}
-                className="text-gray-400 leading-relaxed"
-              >
-                UndocuLink was founded with a clear purpose: to bridge the gap between talented undocumented students and life-changing opportunities. We believe that everyone deserves access to education and career advancement, regardless of their immigration status.
-              </motion.p>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                viewport={{ once: true }}
-                className="text-gray-400 leading-relaxed"
-              >
-                Our platform serves as a comprehensive resource hub, connecting students with scholarships, professional opportunities, and legal assistance while building a supportive community of peers and mentors.
-              </motion.p>
-            </div>
+ <motion.div
+   initial={{ opacity: 0, y: 20 }}
+   whileInView={{ opacity: 1, y: 0 }}
+   transition={{ duration: 0.5 }}
+   viewport={{ once: true }}
+   className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+ >
+   <div className="space-y-6">
+     <div className="flex items-center gap-4 mb-8">
+       <h3 className="text-2xl font-semibold">Our Mission</h3>
+     </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 gap-6"
-            >
-              {[
-                { number: "10k+", label: "Students Helped" },
-                { number: "500+", label: "Partner Organizations" },
-                { number: "$2M+", label: "Scholarships Awarded" },
-                { number: "95%", label: "Success Rate" }
-              ].map((stat, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="p-6 bg-gray-800/50 rounded-lg text-center hover:bg-gray-800/70 transition-colors"
-                >
-                  <div className="text-3xl font-bold text-blue-400 mb-2">{stat.number}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-     </main>
+     <motion.p 
+       initial={{ opacity: 0, y: 20 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{ delay: 0.3 }}
+       viewport={{ once: true }}
+       className="text-gray-400 leading-relaxed mb-6"
+     >
+       UndocuLink was founded with one simple mission, to connect the undocumented
+       population with the needed resources and opportunities to succeed in higher 
+       education and professionally.
+     </motion.p>
+     
+     <motion.p 
+       initial={{ opacity: 0, y: 20 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{ delay: 0.4 }}
+       viewport={{ once: true }}
+       className="text-gray-400 leading-relaxed mb-6"
+     >
+       Whether you are in high school, college, are about to graduate, or are already 
+       in the workforce, we are here to help you succeed in whatever you set your mind to.
+     </motion.p>
+
+     <motion.p 
+       initial={{ opacity: 0, y: 20 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{ delay: 0.5 }}
+       viewport={{ once: true }}
+       className="text-gray-400 leading-relaxed mb-6"
+     >
+       Our platform serves as a comprehensive resource hub collecting undocu friendly 
+       opportunities from all across the web. We achieve this while keeping your security 
+       as a priority as we do not collect any personal data nor do we ever lock any 
+       resources behind a paywall.
+     </motion.p>
+   </div>
+
+   <motion.div
+     initial={{ opacity: 0, scale: 0.95 }}
+     whileInView={{ opacity: 1, scale: 1 }}
+     transition={{ duration: 0.5 }}
+     viewport={{ once: true }}
+     className="relative h-[600px] rounded-xl overflow-hidden"
+   >
+     <Image
+       src="/logo.png"
+       alt="Empowered Students"
+       fill
+       className="object-cover rounded-xl"
+     />
+     <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent"></div>
+   </motion.div>
+ </motion.div>
+</div>
+</main>
 
 
      <footer className="mt-32 py-8 border-t border-gray-800">

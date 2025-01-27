@@ -107,7 +107,7 @@ export default function Home() {
                transition={{ delay: 0.2 }}
                className="text-blue-400 block text-shadow"
              >
-               Empowering Students
+               Linking Students
              </motion.span>
              <motion.span
                initial={{ opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ export default function Home() {
              transition={{ delay: 0.6 }}
              className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-12 text-shadow"
            >
-             A centralized platform connecting undocumented and immigrant students with career resources
+             A Centralized, Secure and 100% Free Platform Connecting Undocumented and Immigrant Students with Resources
            </motion.p>
 
            <motion.div 
@@ -134,7 +134,7 @@ export default function Home() {
              className="flex flex-col sm:flex-row justify-center gap-4"
            >
              <Link 
-               href="/get-started"
+               href="/signup"
                className="px-6 py-3 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors text-shadow"
              >
                Get Started
@@ -165,15 +165,15 @@ export default function Home() {
            {[
              {
                title: "Centralized Resources",
-               description: "All jobs, scholarships, and opportunities in one place."
+               description: "Jobs, Internships, Fellowships, Research Opportunities and every resaource imagginable collected from across the web in one place."
              },
              {
-               title: "User-Friendly Interface",
-               description: "Clean, intuitive design for easy navigation."
+               title: "Secure and UI Friendly Design",
+               description: "Clean, intuitive design with modern security protocals designed to collect ZERO personal data"
              },
              {
                title: "AI-Powered Tools",
-               description: "Tools to optimize your resume and career path."
+               description: "Tools to optimize your resume and career path to help you stay informed and forge your path forward"
              }
            ].map((feature, index) => (
              <motion.div 
@@ -190,15 +190,94 @@ export default function Home() {
            ))}
          </motion.div>
        </div>
+
+       {/* About Us Section */}
+       <div id="about" className="max-w-7xl mx-auto px-6 mt-32">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-3xl font-bold text-blue-400 text-center mb-12"
+          >
+            About Us
+          </motion.h2>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+          >
+            <div className="space-y-6">
+              <motion.h3 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+                className="text-2xl font-semibold mb-4"
+              >
+                Our Mission
+              </motion.h3>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+                className="text-gray-400 leading-relaxed"
+              >
+                UndocuLink was founded with a clear purpose: to bridge the gap between talented undocumented students and life-changing opportunities. We believe that everyone deserves access to education and career advancement, regardless of their immigration status.
+              </motion.p>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                viewport={{ once: true }}
+                className="text-gray-400 leading-relaxed"
+              >
+                Our platform serves as a comprehensive resource hub, connecting students with scholarships, professional opportunities, and legal assistance while building a supportive community of peers and mentors.
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 gap-6"
+            >
+              {[
+                { number: "10k+", label: "Students Helped" },
+                { number: "500+", label: "Partner Organizations" },
+                { number: "$2M+", label: "Scholarships Awarded" },
+                { number: "95%", label: "Success Rate" }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="p-6 bg-gray-800/50 rounded-lg text-center hover:bg-gray-800/70 transition-colors"
+                >
+                  <div className="text-3xl font-bold text-blue-400 mb-2">{stat.number}</div>
+                  <div className="text-sm text-gray-400">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
      </main>
+
 
      <footer className="mt-32 py-8 border-t border-gray-800">
        <div className="max-w-7xl mx-auto px-6">
          <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-gray-400">
-           <Link href="/about" className="hover:text-blue-400 transition-colors">About</Link>
+           <Link href="/#about" className="hover:text-blue-400 transition-colors">About Us</Link>
            <Link href="/contact" className="hover:text-blue-400 transition-colors">Contact</Link>
            <Link href="/terms" className="hover:text-blue-400 transition-colors">Terms of Service</Link>
-           <p>© 2024 UndocuLink. All Rights Reserved.</p>
+           <p>© 2025 UndocuLink. All Rights Reserved.</p>
          </div>
        </div>
      </footer>

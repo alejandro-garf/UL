@@ -15,82 +15,92 @@ import java.util.UUID;
 @Service
 public class AuthService {
 
-   @Autowired
-   private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-   @Autowired
-   private JwtService jwtService;
+    @Autowired
+    private JwtService jwtService;
 
-   // Response DTO
-   @Data
-   public static class AuthResponse {
-       private final String accessToken;
-       private final String refreshToken;
-       private final String username;
-   }
+    // Response DTO
+    @Data
+    public static class AuthResponse {
+        private String accessToken;
+        private String refreshToken;
+        private String username;
 
-   public User registerUser(RegisterRequest request) throws NoSuchAlgorithmException {
-       // Check if username exists
-       if (userRepository.existsByUsername(request.getUsername())) {
-           throw new RuntimeException("Username already exists");
-       }
+        public AuthResponse(String accessToken, String refreshToken, String username) {
+            this.accessToken = accessToken;
+            this.refreshToken = refreshToken;
+            this.username = username;
+        }
+    }
 
-       // Create new user
-       User user = new User();
-       user.setId(UUID.randomUUID().toString());
-       user.setUsername(request.getUsername());
-       user.setHashedPin(hashPin(request.getPin()));
-       user.setPublicKey(request.getPublicKey());
-       user.setSeedPhraseHash(hashSeedPhrase(request.getSeedPhrase()));
+    public User registerUser(RegisterRequest request) throws NoSuchAlgorithmException {
+        // Check if username exists
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
 
-       return userRepository.save(user);
-   }
+        // Create new user
+        User user = new User();
+        user.setId(UUID.randomUUID().toString());
+        user.setUsername(request.getUsername());
+        user.setHashedPin(hashPin(request.getPin()));
+        user.setPublicKey(request.getPublicKey());
+        user.setSeedPhraseHash(hashSeedPhrase(request.getSeedPhrase()));
 
-   public AuthResponse loginUser(LoginRequest request) throws NoSuchAlgorithmException {
-       User user = userRepository.findByUsername(request.getUsername())
-           .orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.save(user);
+    }
 
-       if (!user.getHashedPin().equals(hashPin(request.getPin()))) {
-           throw new RuntimeException("Invalid PIN");
-       }
+    public AuthResponse loginUser(LoginRequest request) throws NoSuchAlgorithmException {
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-       String accessToken = jwtService.generateAccessToken(user.getUsername());
-       String refreshToken = jwtService.generateRefreshToken(user.getUsername());
+        if (!user.getHashedPin().equals(hashPin(request.getPin()))) {
+            throw new RuntimeException("Invalid PIN");
+        }
 
-       return new AuthResponse(accessToken, refreshToken, user.getUsername());
-   }
+        String accessToken = jwtService.generateAccessToken(user.getUsername());
+        String refreshToken = jwtService.generateRefreshToken(user.getUsername());
 
-   public AuthResponse refreshToken(String refreshToken) {
-       String username = jwtService.getUsernameFromToken(refreshToken);
-       if (username == null || !jwtService.validateToken(refreshToken)) {
-           throw new RuntimeException("Invalid refresh token");
-       }
+        return new AuthResponse(accessToken, refreshToken, user.getUsername());
+    }
 
-       String newAccessToken = jwtService.generateAccessToken(username);
-       String newRefreshToken = jwtService.generateRefreshToken(username);
+    public AuthResponse refreshToken(String refreshToken) {
+        String username = jwtService.getUsernameFromToken(refreshToken);
+        if (username == null || !jwtService.validateToken(refreshToken)) {
+            throw new RuntimeException("Invalid refresh token");
+        }
 
-       return new AuthResponse(newAccessToken, newRefreshToken, username);
-   }
+        String newAccessToken = jwtService.generateAccessToken(username);
+        String newRefreshToken = jwtService.generateRefreshToken(username);
 
-   private String hashPin(String pin) throws NoSuchAlgorithmException {
-       MessageDigest digest = MessageDigest.getInstance("SHA-256");
-       byte[] hash = digest.digest(pin.getBytes());
-       return bytesToHex(hash);
-   }
+        return new AuthResponse(newAccessToken, newRefreshToken, username);
+    }
 
-   private String hashSeedPhrase(String seedPhrase) throws NoSuchAlgorithmException {
-       MessageDigest digest = MessageDigest.getInstance("SHA-256");
-       byte[] hash = digest.digest(seedPhrase.getBytes());
-       return bytesToHex(hash);
-   }
+    public String getUsernameFromToken(String token) {
+        return jwtService.getUsernameFromToken(token); // Delegates to JwtService
+    }
 
-   private String bytesToHex(byte[] hash) {
-       StringBuilder hexString = new StringBuilder();
-       for (byte b : hash) {
-           String hex = Integer.toHexString(0xff & b);
-           if (hex.length() == 1) hexString.append('0');
-           hexString.append(hex);
-       }
-       return hexString.toString();
-   }
+    private String hashPin(String pin) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(pin.getBytes());
+        return bytesToHex(hash);
+    }
+
+    private String hashSeedPhrase(String seedPhrase) throws NoSuchAlgorithmException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(seedPhrase.getBytes());
+        return bytesToHex(hash);
+    }
+
+    private String bytesToHex(byte[] hash) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) hexString.append('0');
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import AlertMap from '@/app/components/AlertMap';
 
 // Sample news data - replace with API call
 const sampleNews = [
@@ -121,9 +122,11 @@ function AuthenticatedLegalPage() {
           <div className="bg-gray-800/50 rounded-lg p-6">
             <div className="aspect-video relative bg-gray-700 rounded-lg overflow-hidden">
               {/* Replace with actual map implementation */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <p className="text-gray-400">Interactive map loading...</p>
-              </div>
+              <AlertMap 
+                sightings={sightings} 
+                center={[-98.5795, 39.8283]} 
+                zoom={4} 
+              />
             </div>
             <div className="mt-4">
               <h3 className="text-lg font-semibold mb-2">Recent Reports</h3>

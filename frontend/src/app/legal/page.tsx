@@ -116,27 +116,27 @@ function AuthenticatedLegalPage() {
         </div>
       )}
 
-      {activeTab === 'map' && (
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-blue-400 mb-6">Community Alert Map</h2>
-          <div className="bg-gray-800/50 rounded-lg p-6">
-            <div className="aspect-video relative bg-gray-700 rounded-lg overflow-hidden">
-              <AlertMap 
-                sightings={sightings} 
-                center={[-98.5795, 39.8283]} 
-                zoom={4} 
-              />
-            </div>
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">Recent Reports</h3>
-              <div className="space-y-2">
-                <p className="text-gray-400">• Checkpoint reported on Main St. (2 hours ago)</p>
-                <p className="text-gray-400">• Activity reported in Downtown area (5 hours ago)</p>
-              </div>
-            </div>
-          </div>
+{activeTab === 'map' && (
+  <div className="space-y-6">
+    <h2 className="text-2xl font-bold text-blue-400 mb-6">Community Alert Map</h2>
+    <div className="bg-gray-800/50 rounded-lg p-6">
+      <div className="w-full h-[600px] relative bg-gray-700 rounded-lg overflow-hidden">
+        <AlertMap 
+          sightings={sightings} 
+          center={[-98.5795, 39.8283]} 
+          zoom={4} 
+        />
+      </div>
+      <div className="mt-4">
+        <h3 className="text-lg font-semibold mb-2">Recent Reports</h3>
+        <div className="space-y-2">
+          <p className="text-gray-400">• Checkpoint reported on Main St. (2 hours ago)</p>
+          <p className="text-gray-400">• Activity reported in Downtown area (5 hours ago)</p>
         </div>
-      )}
+      </div>
+    </div>
+  </div>
+)}
 
       {activeTab === 'services' && (
         <div className="space-y-6">

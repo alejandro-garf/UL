@@ -17,6 +17,13 @@ function AuthenticatedScholarshipsPage() {
       {/* Airtable Embed Section */}
       <div className="mb-10 bg-gray-800/50 p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Live Scholarship Listings</h2>
+        <a href="https://immigrantsrising.org/resource/list-of-scholarships-and-fellowships/" target="_blank" rel="noopener noreferrer">
+        <h3 className="text-1.5xl font-bold mb-4 text-blue-500 hover:text-blue-400 transition duration-300 ease-in-out"
+            style={{ textShadow: "0 0 10px rgba(0, 0, 255, 0.8), 0 0 20px rgba(0, 0, 255, 0.6)" }}>
+            From Immigrants Rising
+        </h3></a>
+
+
         <iframe
           src="https://airtable.com/embed/appNgk0gw9a6VJVMM/shrMq8wbNCW47j9cY/tblKfgGXrIEkpwPUM?layout=card&viewControls=on"
           width="100%"

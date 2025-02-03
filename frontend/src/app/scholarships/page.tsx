@@ -106,6 +106,18 @@ function AuthenticatedScholarshipsPage() {
         </div>
       </div>
 
+      {/* Airtable Embed */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold mb-4">Live Scholarship Listings</h2>
+        <iframe
+          src="https://airtable.com/embed/appNgk0gw9a6VJVMM/shrMq8wbNCW47j9cY/tblKfgGXrIEkpwPUM?layout=card&viewControls=on"
+          width="100%"
+          height="600px"
+          style={{ border: "none" }}
+          className="rounded-lg shadow-lg"
+        />
+      </div>
+
       {/* Tab Navigation */}
       <div className="flex flex-wrap gap-4 mb-8">
         <button

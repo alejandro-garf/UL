@@ -120,7 +120,7 @@ function AuthenticatedLegalPage() {
   <div className="space-y-6">
     <h2 className="text-2xl font-bold text-blue-400 mb-6">Community Alert Map</h2>
     <div className="bg-gray-800/50 rounded-lg p-6">
-      <div className="w-full h-[600px] relative bg-gray-700 rounded-lg overflow-hidden">
+      <div className="w-full h-[600px] relative">  {/* Fixed height container */}
         <AlertMap 
           sightings={sightings} 
           center={[-98.5795, 39.8283]} 

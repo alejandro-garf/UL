@@ -1,3 +1,4 @@
+// app/jobs/page.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -6,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-// Sample job data - replace with real API data
+// Sample job data
 const sampleJobs = {
   fullTime: [
     {
@@ -15,11 +16,10 @@ const sampleJobs = {
       company: "Tech Corp",
       location: "Remote",
       salary: "$80,000 - $120,000",
-      description: "Looking for a full-stack developer with 2+ years of experience...",
+      description: "Looking for a full-stack developer...",
       requirements: ["React", "Node.js", "SQL"],
       type: "Independent Contractor"
-    },
-    // Add more sample jobs
+    }
   ],
   internships: [
     {
@@ -30,8 +30,7 @@ const sampleJobs = {
       stipend: "$5,000",
       duration: "10 weeks",
       description: "Research opportunity in environmental science..."
-    },
-    // Add more internships
+    }
   ],
   research: [
     {
@@ -42,26 +41,19 @@ const sampleJobs = {
       funding: "Grant-funded",
       duration: "1 year",
       description: "AI/ML research project..."
-    },
-    // Add more research opportunities
+    }
   ]
 };
 
-// Authenticated version of the jobs page
 function AuthenticatedJobsPage() {
   const [activeTab, setActiveTab] = useState('fullTime');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredJobs, setFilteredJobs] = useState(sampleJobs);
 
-  useEffect(() => {
-    // Add real API call here to fetch jobs
-  }, []);
-
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     
-    // Filter jobs based on search term
     if (term === '') {
       setFilteredJobs(sampleJobs);
       return;
@@ -87,7 +79,6 @@ function AuthenticatedJobsPage() {
 
   return (
     <div className="max-w-7xl mx-auto px-6">
-      {/* Search Bar */}
       <div className="mb-8">
         <input
           type="text"
@@ -98,7 +89,6 @@ function AuthenticatedJobsPage() {
         />
       </div>
 
-      {/* Tab Navigation */}
       <div className="flex flex-wrap gap-4 mb-8">
         <button
           onClick={() => setActiveTab('fullTime')}
@@ -132,7 +122,6 @@ function AuthenticatedJobsPage() {
         </button>
       </div>
 
-      {/* Job Listings */}
       <div className="space-y-6">
         {activeTab === 'fullTime' && filteredJobs.fullTime.map(job => (
           <div key={job.id} className="p-6 bg-gray-800/50 rounded-lg hover:bg-gray-800/70 transition-all">
@@ -189,11 +178,11 @@ function AuthenticatedJobsPage() {
   );
 }
 
-// Marketing version for non-authenticated users
 function UnauthenticatedJobsPage() {
+  const router = useRouter();
+
   return (
     <div className="max-w-7xl mx-auto px-6">
-      {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -215,7 +204,6 @@ function UnauthenticatedJobsPage() {
         </button>
       </motion.div>
 
-      {/* Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -272,7 +260,6 @@ function UnauthenticatedJobsPage() {
         </motion.div>
       </div>
 
-      {/* Call to Action */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -295,24 +282,26 @@ function UnauthenticatedJobsPage() {
   );
 }
 
-// Main component that checks auth status and renders appropriate version
 export default function JobsPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+
     const checkAuth = async () => {
       const token = localStorage.getItem('accessToken');
       
-      // If token exists, verify it's still valid
       if (token) {
         try {
-          // You can add an API call here to verify the token
-          // For now, we'll just check if it exists
           setIsAuthenticated(true);
         } catch (error) {
-          // If token is invalid, clear storage and redirect to login
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
           localStorage.removeItem('username');
@@ -324,6 +313,7 @@ export default function JobsPage() {
     };
 
     checkAuth();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [router]);
 
   if (loading) {
@@ -336,11 +326,101 @@ export default function JobsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
-      {/* Your existing header/navigation component here */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-900/50 backdrop-blur-lg' : ''}`}>
+        <nav className="w-full mx-auto px-10 h-22 flex items-center justify-between">
+          <Link href="/" className="ml-0">
+            <Image src="/logo.png" alt="Logo" width={100} height={100} className="rounded-full" />
+          </Link>
+
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/dashboard" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Dashboard</Link>
+            <Link href="/jobs" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Job Opportunities</Link>
+            <Link href="/legal" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Legal Help</Link>
+            <Link href="/scholarships" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Scholarships</Link>
+            <Link href="/networking" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Networking</Link>
+            <Link href="/socialmedia" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Social Media</Link>
+          </div>
+
+          <div className="hidden md:flex items-center gap-4 mr-0">
+            {isAuthenticated ? (
+              <button
+                onClick={() => router.push('/logout')}
+                className="px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link href="/login" className="px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors">
+                  Login
+                </Link>
+                <Link href="/signup" className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
+              />
+            </svg>
+          </button>
+        </nav>
+
+        {/* Mobile Menu */}
+        <motion.div 
+          className="md:hidden"
+          initial="closed"
+          animate={mobileMenuOpen ? "open" : "closed"}
+          variants={{
+            open: { height: 'auto', opacity: 1 },
+            closed: { height: 0, opacity: 0 }
+          }}
+        >
+          <div className="px-6 py-4 bg-gray-900/90 backdrop-blur-lg space-y-4">
+            <Link href="/dashboard" className="block hover:text-blue-400 transition-colors">Dashboard</Link>
+            <Link href="/jobs" className="block hover:text-blue-400 transition-colors">Job Opportunities</Link>
+            <Link href="/legal" className="block hover:text-blue-400 transition-colors">Legal Help</Link>
+            <Link href="/scholarships" className="block hover:text-blue-400 transition-colors">Scholarships</Link>
+            <Link href="/networking" className="block hover:text-blue-400 transition-colors">Networking</Link>
+            <Link href="/socialmedia" className="block hover:text-blue-400 transition-colors">Social Media</Link>
+            
+            <div className="pt-4 border-t border-gray-800">
+              {isAuthenticated ? (
+                <button
+                  onClick={() => router.push('/logout')}
+                  className="w-full px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link href="/login" className="block px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors mb-2">
+                    Login
+                  </Link>
+                  <Link href="/signup" className="block px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 transition-colors text-center">
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </header>
+
       <main className="pt-32 md:pt-40 pb-20">
         {isAuthenticated ? <AuthenticatedJobsPage /> : <UnauthenticatedJobsPage />}
       </main>
-      {/* Your existing footer component here */}
     </div>
   );
 }

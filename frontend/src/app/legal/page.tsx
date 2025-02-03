@@ -1,12 +1,14 @@
+// app/legal/page.tsx
 "use client";
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import AlertMap from '@/app/components/AlertMap';
 
-// Sample news data - replace with API call
+// Sample news data
 const sampleNews = [
   {
     id: 1,
@@ -35,15 +37,13 @@ const legalServices = [
     services: ["DACA renewals", "Work permit applications", "Legal consultations"],
     phone: "(555) 123-4567",
     website: "www.example.com"
-  },
-  // Add more services
+  }
 ];
 
 // Mock ICE sighting data
 const sightings = [
   { lat: 34.0522, lng: -118.2437, intensity: 0.8 },
-  { lat: 34.0622, lng: -118.2537, intensity: 0.5 },
-  // Add more data points
+  { lat: 34.0622, lng: -118.2537, intensity: 0.5 }
 ];
 
 function AuthenticatedLegalPage() {
@@ -121,7 +121,6 @@ function AuthenticatedLegalPage() {
           <h2 className="text-2xl font-bold text-blue-400 mb-6">Community Alert Map</h2>
           <div className="bg-gray-800/50 rounded-lg p-6">
             <div className="aspect-video relative bg-gray-700 rounded-lg overflow-hidden">
-              {/* Replace with actual map implementation */}
               <AlertMap 
                 sightings={sightings} 
                 center={[-98.5795, 39.8283]} 
@@ -294,9 +293,16 @@ function UnauthenticatedLegalPage() {
 export default function LegalPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+
     const checkAuth = async () => {
       const token = localStorage.getItem('accessToken');
       
@@ -315,6 +321,7 @@ export default function LegalPage() {
     };
 
     checkAuth();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [router]);
 
   if (loading) {
@@ -327,6 +334,104 @@ export default function LegalPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+      {/* Navbar */}
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-gray-900/50 backdrop-blur-lg' : ''
+      }`}>
+        <nav className="w-full mx-auto px-10 h-22 flex items-center justify-between">
+          <Link href="/" className="ml-0">
+            <Image src="/logo.png" alt="Logo" width={100} height={100} className="rounded-full" />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="/dashboard" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Dashboard</Link>
+            <Link href="/jobs" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Job Opportunities</Link>
+            <Link href="/legal" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Legal Help</Link>
+            <Link href="/scholarships" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Scholarships</Link>
+            <Link href="/networking" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Networking</Link>
+            <Link href="/socialmedia" className="hover:text-blue-400 transition-colors px-4 py-2 rounded-md hover:bg-white/[0.02]">Social Media</Link>
+          </div>
+
+          {/* Auth Buttons/User Menu */}
+          <div className="hidden md:flex items-center gap-4 mr-0">
+            {isAuthenticated ? (
+              <button
+                onClick={() => router.push('/logout')}
+                className="px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors"
+              >
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link href="/login" className="px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors">
+                  Login
+                </Link>
+                <Link href="/signup" className="px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
+              />
+            </svg>
+          </button>
+        </nav>
+
+        {/* Mobile Menu */}
+        <motion.div 
+          className="md:hidden"
+          initial="closed"
+          animate={mobileMenuOpen ? "open" : "closed"}
+          variants={{
+            open: { height: 'auto', opacity: 1 },
+            closed: { height: 0, opacity: 0 }
+          }}
+        >
+          <div className="px-6 py-4 bg-gray-900/90 backdrop-blur-lg space-y-4">
+            <Link href="/dashboard" className="block hover:text-blue-400 transition-colors">Dashboard</Link>
+            <Link href="/jobs" className="block hover:text-blue-400 transition-colors">Job Opportunities</Link>
+            <Link href="/legal" className="block hover:text-blue-400 transition-colors">Legal Help</Link>
+            <Link href="/scholarships" className="block hover:text-blue-400 transition-colors">Scholarships</Link>
+            <Link href="/networking" className="block hover:text-blue-400 transition-colors">Networking</Link>
+            <Link href="/socialmedia" className="block hover:text-blue-400 transition-colors">Social Media</Link>
+            
+            <div className="pt-4 border-t border-gray-800">
+              {isAuthenticated ? (
+                <button
+                  onClick={() => router.push('/logout')}
+                  className="w-full px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link href="/login" className="block px-4 py-2 border border-blue-400 rounded-md hover:bg-blue-400/10 text-blue-400 transition-colors mb-2">
+                    Login
+                  </Link>
+                  <Link href="/signup" className="block px-4 py-2 bg-blue-500 rounded-md hover:bg-blue-600 transition-colors text-center">
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        </motion.div>
+      </header>
+
+      {/* Main Content */}
       <main className="pt-32 md:pt-40 pb-20">
         {isAuthenticated ? <AuthenticatedLegalPage /> : <UnauthenticatedLegalPage />}
       </main>

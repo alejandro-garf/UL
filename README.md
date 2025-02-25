@@ -74,6 +74,8 @@ npm run dev
 - **Frontend:** [http://localhost:3000](http://localhost:3000)  
 - **Backend API:** [http://localhost:8080](http://localhost:8080)
 
+
+
 # Contributing to UndocuLink
 
 The UndocuLink project welcomes contributions from developers. Here's a clear guide on how to contribute effectively:
